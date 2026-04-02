@@ -1,0 +1,10 @@
+{
+  "name": "excalidraw-diagram-scripts",
+  "version": "1.0.0",
+  "description": "Scripts for working with Excalidraw diagrams (export, library splitting).",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.58.2"
+  }
+}
