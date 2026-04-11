@@ -63,7 +63,7 @@
       "locked": false,
       "text": "Step 1",
       "fontSize": 20,
-      "fontFamily": 5,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -158,7 +158,7 @@
       "locked": false,
       "text": "Step 2",
       "fontSize": 20,
-      "fontFamily": 5,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -253,7 +253,7 @@
       "locked": false,
       "text": "Step 3",
       "fontSize": 20,
-      "fontFamily": 5,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     }

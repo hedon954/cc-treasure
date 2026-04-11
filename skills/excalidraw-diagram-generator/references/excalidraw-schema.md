@@ -97,7 +97,7 @@ interface RectangleElement extends BaseElement {
     "containerId": "rect1",
     "text": "My Box",
     "fontSize": 20,
-    "fontFamily": 5,
+    "fontFamily": 8,
     "textAlign": "center",
     "verticalAlign": "middle"
   }
@@ -176,7 +176,7 @@ interface TextElement extends BaseElement {
   type: "text";
   text: string;
   fontSize: number;
-  fontFamily: number;          // Prefer 5 = Excalifont for stable document exports
+  fontFamily: number;          // Prefer 8 = Comic Shanns (this skill default; Excalifont = 5 is also valid)
   textAlign: "left" | "center" | "right";
   verticalAlign: "top" | "middle" | "bottom";
   roundness: null;             // Text has no roundness
@@ -194,7 +194,7 @@ interface TextElement extends BaseElement {
   "height": 25,
   "text": "Hello World",
   "fontSize": 20,
-  "fontFamily": 5,
+  "fontFamily": 8,
   "textAlign": "left",
   "verticalAlign": "top",
   "roundness": null
@@ -211,7 +211,7 @@ For stable exports, especially when using `export-to-png.mjs`, prefer this struc
 
 1. Draw the node shape (`rectangle`, `ellipse`, `diamond`) without inline text.
 2. Add a separate `text` element bound via `containerId`.
-3. Use `fontFamily: 5` for all `text` elements.
+3. Use `fontFamily: 8` (Comic Shanns) for all `text` elements in generated diagrams.
 
 This is more reliable than embedding labels directly in shape elements.
 
@@ -288,12 +288,19 @@ const versionNonce = Math.floor(Math.random() * 2147483647);
 
 ## Font Families
 
-| ID | Name | Description |
-|----|------|-------------|
-| 1 | Virgil | Hand-drawn style |
-| 2 | Helvetica | Clean sans-serif |
-| 3 | Cascadia | Monospace |
-| 5 | Excalifont | Recommended default for stable exports |
+Aligned with `@excalidraw/excalidraw` `FONT_FAMILY` (see upstream `packages/common/src/constants.ts`):
+
+| ID | Name | Notes |
+|----|------|--------|
+| 1 | Virgil | Legacy (deprecated) |
+| 2 | Helvetica | Legacy (deprecated) |
+| 3 | Cascadia | Legacy (deprecated) |
+| 5 | Excalifont | Hand-drawn / default in app |
+| 6 | Nunito | Normal sans |
+| 7 | Lilita One | Display |
+| **8** | **Comic Shanns** | **This skill uses `fontFamily: 8` for all generated text** |
+| 9 | Liberation Sans | Sans |
+| 10 | Assistant | — |
 
 ## Validation Rules
 
@@ -376,7 +383,7 @@ const versionNonce = Math.floor(Math.random() * 2147483647);
       "locked": false,
       "text": "Hello",
       "fontSize": 20,
-      "fontFamily": 5,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     }

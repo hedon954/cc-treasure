@@ -254,7 +254,7 @@ def create_text_label(text: str, x: float, y: float) -> Dict[str, Any]:
         "locked": False,
         "text": text,
         "fontSize": 16,
-        "fontFamily": 5,  # Excalifont
+        "fontFamily": 8,  # Comic Shanns
         "textAlign": "center",
         "verticalAlign": "top",
         "containerId": None,

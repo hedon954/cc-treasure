@@ -32,7 +32,7 @@
       "locked": false,
       "text": "User",
       "fontSize": 18,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -99,7 +99,7 @@
       "locked": false,
       "text": "input data",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -132,7 +132,7 @@
       "locked": false,
       "text": "Process\nData",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -199,7 +199,7 @@
       "locked": false,
       "text": "processed data",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -232,7 +232,7 @@
       "locked": false,
       "text": "Data Store\n(Database)",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },

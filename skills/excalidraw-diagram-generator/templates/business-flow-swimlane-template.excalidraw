@@ -32,7 +32,7 @@
       "locked": false,
       "text": "Business Process Flow",
       "fontSize": 24,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "top"
     },
@@ -65,7 +65,7 @@
       "locked": false,
       "text": "Customer",
       "fontSize": 18,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -126,7 +126,7 @@
       "locked": false,
       "text": "Submit\nRequest",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -159,7 +159,7 @@
       "locked": false,
       "text": "Sales Team",
       "fontSize": 18,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -220,7 +220,7 @@
       "locked": false,
       "text": "Review\nRequest",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -287,7 +287,7 @@
       "locked": false,
       "text": "Approve",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },

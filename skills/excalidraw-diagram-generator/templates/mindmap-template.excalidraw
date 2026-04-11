@@ -76,7 +76,7 @@
       "locked": false,
       "text": "Central Topic",
       "fontSize": 20,
-      "fontFamily": 5,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -149,7 +149,7 @@
       "locked": false,
       "text": "Branch 1",
       "fontSize": 18,
-      "fontFamily": 5,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -275,7 +275,7 @@
       "locked": false,
       "text": "Branch 2",
       "fontSize": 18,
-      "fontFamily": 5,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },

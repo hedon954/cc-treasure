@@ -315,7 +315,7 @@ Use separate text elements positioned near arrow midpoint:
   type: "text",
   text: "Label text",
   fontSize: 20,
-  fontFamily: 1,        // 1=Virgil, 2=Helvetica, 3=Cascadia
+  fontFamily: 8,        // This skill: 8=Comic Shanns (see excalidraw-schema.md FONT_FAMILY table)
   textAlign: "left",
   verticalAlign: "top"
 }
@@ -364,7 +364,7 @@ const height = fontSize * 1.2 * lines;
   "height": 40,
   "text": "System Architecture",
   "fontSize": 32,
-  "fontFamily": 2,
+  "fontFamily": 8,
   "textAlign": "center",
   "verticalAlign": "top"
 }
@@ -381,7 +381,7 @@ const height = fontSize * 1.2 * lines;
   "height": 20,
   "text": "User input",
   "fontSize": 14,
-  "fontFamily": 1,
+  "fontFamily": 8,
   "textAlign": "left",
   "verticalAlign": "top"
 }

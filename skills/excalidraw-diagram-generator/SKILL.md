@@ -130,11 +130,11 @@ Create the `.excalidraw` file with appropriate elements:
 - **Position**: `x`, `y` coordinates
 - **Size**: `width`, `height`
 - **Style**: `strokeColor`, `backgroundColor`, `fillStyle`
-- **Font**: `fontFamily: 5` (Excalifont - **required for all text elements**)
+- **Font**: `fontFamily: 8` (Comic Shanns — **required for all text elements**)
 - **Connections**: `points` array for arrows
 
 **Important**:
-- All visible text must be represented by explicit `text` elements with `fontFamily: 5` (Excalifont).
+- All visible text must be represented by explicit `text` elements with `fontFamily: 8` (Comic Shanns).
 - Do **not** rely on `rectangle.text`, `ellipse.text`, or `diamond.text` for primary labels. Those inline text fields are legacy placeholders and may render inconsistently in the PNG export pipeline.
 - Preferred pattern: create the shape first, then add a separate `text` element bound via `containerId`/`boundElements`.
 
@@ -170,7 +170,7 @@ Good (bound text — stays attached when container moves):
     "containerId": "box-1",
     "text": "核心执行引擎",
     "fontSize": 20,
-    "fontFamily": 5,
+    "fontFamily": 8,
     "textAlign": "center",
     "verticalAlign": "middle"
   }
@@ -244,7 +244,7 @@ Structure the complete Excalidraw file:
    - Important/Central: Yellow (`#ffd43b`)
    - Alerts/Warnings: Light red (`#ffc9c9`)
 4. **Text sizing**: 16-24px for readability
-5. **Font**: Always use `fontFamily: 5` (Excalifont) for all text elements
+5. **Font**: Always use `fontFamily: 8` (Comic Shanns) for all text elements
 6. **Arrow style**: Use straight arrows for simple flows, curved for complex relationships
 
 ### Complexity Management
@@ -352,7 +352,7 @@ Before delivering the diagram:
 - [ ] All elements have unique IDs
 - [ ] Coordinates prevent overlapping
 - [ ] Text is readable (font size 16+)
-- [ ] **All text elements use `fontFamily: 5` (Excalifont)**
+- [ ] **All text elements use `fontFamily: 8` (Comic Shanns)**
 - [ ] Arrows connect logically
 - [ ] Colors follow consistent scheme
 - [ ] File is valid JSON

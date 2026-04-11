@@ -63,7 +63,7 @@
       "locked": false,
       "text": "Entity A",
       "fontSize": 20,
-      "fontFamily": 5,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -127,7 +127,7 @@
       "locked": false,
       "text": "Entity B",
       "fontSize": 20,
-      "fontFamily": 5,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -191,7 +191,7 @@
       "locked": false,
       "text": "relates to",
       "fontSize": 16,
-      "fontFamily": 5,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     }

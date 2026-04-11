@@ -32,7 +32,7 @@
       "locked": false,
       "text": "Client",
       "fontSize": 18,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -99,7 +99,7 @@
       "locked": false,
       "text": "Server",
       "fontSize": 18,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -166,7 +166,7 @@
       "locked": false,
       "text": "Database",
       "fontSize": 18,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "middle"
     },
@@ -267,7 +267,7 @@
       "locked": false,
       "text": "1: request()",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -362,7 +362,7 @@
       "locked": false,
       "text": "2: query()",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -429,7 +429,7 @@
       "locked": false,
       "text": "3: result",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -496,7 +496,7 @@
       "locked": false,
       "text": "4: response",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     }

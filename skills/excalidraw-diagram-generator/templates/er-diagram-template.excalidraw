@@ -60,7 +60,7 @@
       "locked": false,
       "text": "User",
       "fontSize": 20,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "top"
     },
@@ -127,7 +127,7 @@
       "locked": false,
       "text": "PK: user_id\nname\nemail\ncreated_at",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -188,7 +188,7 @@
       "locked": false,
       "text": "Order",
       "fontSize": 20,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "top"
     },
@@ -255,7 +255,7 @@
       "locked": false,
       "text": "PK: order_id\nFK: user_id\ntotal_amount\norder_date",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -322,7 +322,7 @@
       "locked": false,
       "text": "1",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -355,7 +355,7 @@
       "locked": false,
       "text": "N",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -388,7 +388,7 @@
       "locked": false,
       "text": "places",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "top"
     },
@@ -449,7 +449,7 @@
       "locked": false,
       "text": "Product",
       "fontSize": 20,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "top"
     },
@@ -516,7 +516,7 @@
       "locked": false,
       "text": "PK: product_id\nname\nprice",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -583,7 +583,7 @@
       "locked": false,
       "text": "N",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -616,7 +616,7 @@
       "locked": false,
       "text": "M",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "left",
       "verticalAlign": "top"
     },
@@ -649,7 +649,7 @@
       "locked": false,
       "text": "contains",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 8,
       "textAlign": "center",
       "verticalAlign": "top"
     }
