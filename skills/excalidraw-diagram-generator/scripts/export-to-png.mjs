@@ -2,9 +2,9 @@
 /**
  * Export Excalidraw files to PNG using Excalidraw's native renderer.
  *
- * Uses Playwright to load @excalidraw/excalidraw from esm.sh CDN
- * (which bundles all deps), then calls exportToBlob() for pixel-perfect
- * output identical to Excalidraw's own "Copy as PNG".
+ * Loads the bundled Excalidraw runtime from ./vendor/ (offline — no CDN).
+ * Calls exportToBlob() for pixel-perfect output identical to Excalidraw's
+ * own "Copy as PNG".
  *
  * Usage:
  *   node export-to-png.mjs input.excalidraw [output.png] [--scale 2]
@@ -12,8 +12,9 @@
 
 import { chromium } from "playwright";
 import { readFileSync, writeFileSync } from "fs";
-import { resolve, basename } from "path";
+import { resolve, basename, dirname, join } from "path";
 import { parseArgs } from "util";
+import { fileURLToPath, pathToFileURL } from "url";
 
 // ---------------------------------------------------------------------------
 // CLI
@@ -44,6 +45,9 @@ const outputPath = positionals[1]
   ? resolve(positionals[1])
   : inputPath.replace(/\.excalidraw$/, ".png");
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const hostUrl = pathToFileURL(join(__dirname, "export-host.html")).href;
+
 // ---------------------------------------------------------------------------
 // Read & validate
 // ---------------------------------------------------------------------------
@@ -57,102 +61,82 @@ try {
 }
 
 // ---------------------------------------------------------------------------
-// HTML page using esm.sh for zero-config dependency resolution
-// ---------------------------------------------------------------------------
-const html = `<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body>
-<div id="status">loading</div>
-<script type="module">
-try {
-  document.getElementById("status").textContent = "importing";
-
-  // esm.sh bundles all transitive dependencies (react, jotai, etc.)
-  const { exportToBlob } = await import(
-    "https://esm.sh/@excalidraw/excalidraw?bundle-deps"
-  );
-
-  document.getElementById("status").textContent = "exporting";
-
-  // Decode Base64 as UTF-8 bytes; plain atob() corrupts non-Latin-1 text.
-  const raw = document.getElementById("excalidraw-data").textContent;
-  const bytes = Uint8Array.from(atob(raw), (c) => c.charCodeAt(0));
-  const data = JSON.parse(new TextDecoder("utf-8").decode(bytes));
-  const scale = ${scale};
-
-  const blob = await exportToBlob({
-    elements: data.elements || [],
-    appState: {
-      ...(data.appState || {}),
-      exportBackground: true,
-      exportWithDarkMode: false,
-      viewBackgroundColor:
-        (data.appState && data.appState.viewBackgroundColor) || "#ffffff",
-    },
-    files: data.files || {},
-    exportPadding: 20,
-    getDimensions: (w, h) => ({
-      width: w * scale,
-      height: h * scale,
-      scale: scale,
-    }),
-  });
-
-  const reader = new FileReader();
-  reader.onloadend = () => {
-    window.__EXPORT_RESULT__ = reader.result;
-    document.getElementById("status").textContent = "done";
-  };
-  reader.readAsDataURL(blob);
-} catch (e) {
-  document.getElementById("status").textContent = "error:" + e.message;
-  console.error("Export error:", e);
-}
-</script>
-<script type="text/plain" id="excalidraw-data">__DATA_BASE64__</script>
-</body>
-</html>`;
-
-// ---------------------------------------------------------------------------
-// Launch headless browser
+// Launch headless browser (local vendor bundle — no network)
 // ---------------------------------------------------------------------------
 console.log(`Exporting ${basename(inputPath)} → PNG (${scale}x)...`);
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
 
-// Capture console for debugging
 page.on("console", (msg) => {
   if (msg.type() === "error") console.error("BROWSER:", msg.text());
 });
 
-// Inject HTML with data embedded as Base64 (avoids HTML injection from JSON content)
-const base64Data = Buffer.from(excalidrawRaw).toString("base64");
-const fullHtml = html.replace("__DATA_BASE64__", base64Data);
+await page.goto(hostUrl, { waitUntil: "domcontentloaded" });
 
-await page.setContent(fullHtml, { waitUntil: "domcontentloaded" });
-
-// Wait for export (up to 60s — first run needs to download from esm.sh CDN)
 try {
-  await page.waitForFunction(() => window.__EXPORT_RESULT__, {
-    timeout: 60000,
-  });
+  await page.waitForFunction(
+    () =>
+      window.__excalidrawVendor &&
+      typeof window.__excalidrawVendor.exportToBlob === "function",
+    { timeout: 60000 }
+  );
 } catch {
   const status = await page.textContent("#status");
-  console.error(`Export timed out. Status: ${status}`);
+  console.error(
+    `Timed out waiting for Excalidraw vendor bundle. Status: ${status}\n` +
+      `Ensure vendor/excalidraw-browser.iife.js exists (run: npm run build:vendor).`
+  );
   await browser.close();
   process.exit(1);
 }
 
-// Save PNG
-const dataUrl = await page.evaluate(() => window.__EXPORT_RESULT__);
-if (!dataUrl || !dataUrl.includes(",")) {
+let dataUrl;
+try {
+  dataUrl = await page.evaluate(
+    async ({ raw, scale: s }) => {
+      const { exportToBlob } = window.__excalidrawVendor;
+      const data = JSON.parse(raw);
+      const blob = await exportToBlob({
+        elements: data.elements || [],
+        appState: {
+          ...(data.appState || {}),
+          exportBackground: true,
+          exportWithDarkMode: false,
+          viewBackgroundColor:
+            (data.appState && data.appState.viewBackgroundColor) || "#ffffff",
+        },
+        files: data.files || {},
+        exportPadding: 20,
+        getDimensions: (w, h) => ({
+          width: w * s,
+          height: h * s,
+          scale: s,
+        }),
+      });
+      return await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(blob);
+      });
+    },
+    { raw: excalidrawRaw, scale }
+  );
+} catch (e) {
+  const status = await page.textContent("#status");
+  console.error(`Export failed: ${e.message}. Status: ${status}`);
+  await browser.close();
+  process.exit(1);
+}
+
+if (!dataUrl || !String(dataUrl).includes(",")) {
   console.error("Export failed: no valid data URL returned");
   await browser.close();
   process.exit(1);
 }
-const base64Png = dataUrl.split(",")[1];
+
+const base64Png = String(dataUrl).split(",")[1];
 writeFileSync(outputPath, Buffer.from(base64Png, "base64"));
 
 await browser.close();

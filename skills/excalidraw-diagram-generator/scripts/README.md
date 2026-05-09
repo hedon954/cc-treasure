@@ -2,6 +2,19 @@
 
 This directory contains scripts for working with Excalidraw libraries.
 
+## Offline browser bundle (`vendor/`)
+
+`export-to-png.mjs` and `convert-browser.mjs` load **`vendor/excalidraw-browser.iife.js`** — a pre-built bundle of `@excalidraw/excalidraw` and `@excalidraw/mermaid-to-excalidraw` so PNG export and Mermaid conversion work **without any CDN** (no esm.sh).
+
+**End users:** after `npm install` / `npm ci --omit=dev` and `npx playwright install chromium`, the scripts run fully offline.
+
+**Maintainers:** to regenerate the bundle (e.g. after bumping Excalidraw in `devDependencies`):
+
+```bash
+npm install
+npm run build:vendor
+```
+
 ## split-excalidraw-library.py
 
 Splits an Excalidraw library file (`*.excalidrawlib`) into individual icon JSON files for efficient token usage by AI assistants.
@@ -197,13 +210,13 @@ python add-arrow.py diagram.excalidraw 300 200 500 300
 ## convert-browser.mjs
 
 Batch-converts Mermaid code blocks in a Markdown file to Excalidraw JSON + PNG images.
-Uses Playwright to run `@excalidraw/mermaid-to-excalidraw` and `@excalidraw/excalidraw` in a browser context.
+Uses Playwright with the same **offline** `vendor/excalidraw-browser.iife.js` as `export-to-png.mjs` (no CDN).
 
 ### Prerequisites
 
 - Node.js 18+
 - Playwright with Chromium (`npx playwright install chromium`)
-- Dependencies installed (`npm install` in this directory)
+- `npm install` or `npm ci --omit=dev` in this directory (runtime dependency: Playwright only; vendor file is committed)
 
 ### Usage
 

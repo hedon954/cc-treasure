@@ -1,5 +1,8 @@
 # Avoid accidentally committing local Python artifacts produced when running these scripts.
 
+# npm (Playwright, optional devDependencies for rebuilding vendor)
+node_modules/
+
 # Byte-compiled / cache files
 __pycache__/
 *.py[cod]

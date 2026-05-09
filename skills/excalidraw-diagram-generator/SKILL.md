@@ -650,7 +650,9 @@ See bundled references for:
 - `templates/flowchart-template.json` - Basic flowchart starter
 - `templates/relationship-template.json` - Relationship diagram starter
 - `templates/mindmap-template.json` - Mind map starter
-- `scripts/export-to-png.mjs` - Export `.excalidraw` to PNG (native renderer via Playwright)
+- `scripts/export-to-png.mjs` - Export `.excalidraw` to PNG (native renderer via Playwright; offline vendor bundle)
+- `scripts/vendor/excalidraw-browser.iife.js` - Bundled Excalidraw + mermaid helpers (no CDN)
+- `scripts/build-excalidraw-vendor.mjs` - Rebuild vendor bundle after bumping `@excalidraw/*` devDependencies
 - `scripts/split-excalidraw-library.py` - Tool to split `.excalidrawlib` files
 - `scripts/README.md` - Documentation for library tools
 - `scripts/.gitignore` - Prevents local Python artifacts from being committed
@@ -677,15 +679,15 @@ node <skill-path>/scripts/export-to-png.mjs diagram.excalidraw --no-scale
 
 ### What the Script Does
 
-1. **Loads Excalidraw in a headless browser** — Uses Playwright to run Chromium with `@excalidraw/excalidraw` loaded from esm.sh CDN.
+1. **Loads Excalidraw in a headless browser** — Uses Playwright to open `scripts/export-host.html`, which loads a pre-built IIFE bundle from `scripts/vendor/excalidraw-browser.iife.js` (fully offline — no CDN).
 2. **Calls `exportToBlob()`** — The same rendering function Excalidraw uses for its own "Copy as PNG" feature, ensuring pixel-perfect output with correct element positioning, fonts, and colors.
 3. **Saves the PNG** at the specified scale (default 2x for crisp retina display).
 
 ### Requirements
 
 - Node.js 18+
-- Playwright with Chromium (installed in skill's `scripts/node_modules/`)
-- Internet access (for esm.sh CDN on first run; subsequent runs use browser cache)
+- Playwright with Chromium (`cd <skill-path>/scripts && npx playwright install chromium` once per machine)
+- **No internet required for export** — the Excalidraw runtime is vendored in `scripts/vendor/`. Only `npm install` (or `npm ci --omit=dev`) is needed for Playwright; to rebuild the vendor file after editing Excalidraw versions, run `npm run build:vendor` with devDependencies installed.
 
 ### When to Export
 
@@ -702,7 +704,7 @@ Skip export when:
 
 | Issue | Cause | Fix |
 |-------|-------|-----|
-| Export timed out | CDN unreachable or slow first load | Retry; first run downloads deps from esm.sh |
+| Export timed out | Vendor bundle missing or Chromium slow to start | Ensure `scripts/vendor/excalidraw-browser.iife.js` exists; run `npm run build:vendor` if needed |
 | Blank/empty PNG | No elements in the file | Check the .excalidraw file has elements |
 | Playwright not found | Dependencies not installed | Run `cd <skill-path>/scripts && npm install && npx playwright install chromium` |
 
